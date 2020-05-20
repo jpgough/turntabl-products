@@ -29,7 +29,8 @@ public class ProductsApplication {
 				.apis(Predicates.not(RequestHandlerSelectors.basePackage("org.springframework.data.rest.webmvc")))
 				.paths(PathSelectors.any())
 				.build()
-                .apiInfo(metaInfo());
+                .apiInfo(metaInfo())
+				.host("localhost/products");
 	}
 
     private ApiInfo metaInfo() {
