@@ -1,41 +1,33 @@
 package com.turntabl.api.controller;
 
 import com.turntabl.api.domain.Product;
+import com.turntabl.api.service.Data;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class ProductController {
+    @Autowired
+    private Data data;
 
     @GetMapping("/products")
     public List<Product> getProducts() {
-        List<Product> products = new ArrayList<>();
-        Product product = new Product();
-        product.setAsk(new BigDecimal("649"));
-        product.setDisplayName("CARLSBERG `B`DKK20");
-        product.setExchange("LSE");
-        product.setHigh(new BigDecimal("848.8"));
-        product.setOpen(new BigDecimal("837.7"));
-        product.setVolume(11_627);
-        product.setTicker("0AI4");
-        product.setProductId("P556");
-        products.add(product);
+        return data.getProducts();
+    }
 
-        product = new Product();
-        product.setAsk(new BigDecimal("0"));
-        product.setDisplayName("Sage Group Plc");
-        product.setExchange("LSE");
-        product.setHigh(new BigDecimal("660"));
-        product.setOpen(new BigDecimal("642.6"));
-        product.setVolume(6_342_504);
-        product.setTicker("SGE");
-        product.setProductId("P987");
-        products.add(product);
-
-        return products;
+    @GetMapping(value = "/products/{productId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Product> getProduct(@PathVariable(value = "productId") String productId){
+        Optional<Product> product = data.getProduct(productId);
+        return product.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 }
