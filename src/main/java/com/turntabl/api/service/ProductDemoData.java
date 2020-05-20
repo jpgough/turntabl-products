@@ -4,15 +4,13 @@ import com.turntabl.api.domain.Product;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
-public class Data {
-    private List<Product> products = new ArrayList<>();
+public class ProductDemoData {
+    private Map<String, Product> products = new HashMap<>();
 
-    public Data() {
+    public ProductDemoData() {
         Product product = new Product();
         product.setAsk(new BigDecimal("649"));
         product.setDisplayName("CARLSBERG `B`DKK20");
@@ -22,7 +20,7 @@ public class Data {
         product.setVolume(11_627);
         product.setTicker("0AI4");
         product.setProductId("P556");
-        this.products.add(product);
+        this.products.put("P556", product);
 
         product = new Product();
         product.setAsk(new BigDecimal("0"));
@@ -33,17 +31,14 @@ public class Data {
         product.setVolume(6_342_504);
         product.setTicker("SGE");
         product.setProductId("P987");
-        this.products.add(product);
+        this.products.put("P987", product);
     }
 
-    public List<Product> getProducts() {
-        return this.products;
+    public Collection<Product> getProducts() {
+        return this.products.values();
     }
 
-    public Optional<Product> getProduct(String productId){
-        return this.products
-                .stream()
-                .filter(product -> product.getProductId().equals(productId))
-                .findFirst();
+    public Product getProduct(String productId){
+        return this.products.get(productId);
     }
 }

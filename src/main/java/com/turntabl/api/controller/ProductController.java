@@ -1,34 +1,30 @@
 package com.turntabl.api.controller;
 
 import com.turntabl.api.domain.Product;
-import com.turntabl.api.service.Data;
+import com.turntabl.api.service.ProductDemoData;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.Extension;
-import io.swagger.annotations.ExtensionProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.Collection;
 
 @RestController
+@CrossOrigin("*")
 public class ProductController {
     @Autowired
-    private Data data;
+    private ProductDemoData data;
 
     @GetMapping("/products")
     @ApiOperation(
             value = "Returns all products ",
             notes = "Multiple products object values, separated by comma"
     )
-    public List<Product> getProducts() {
+    public Collection<Product> getProducts() {
         return data.getProducts();
     }
 
@@ -38,7 +34,7 @@ public class ProductController {
             notes = "single products object value with matching id"
     )
     public ResponseEntity<Product> getProduct(@PathVariable(value = "productId") String productId){
-        Optional<Product> product = data.getProduct(productId);
-        return product.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        Product product = data.getProduct(productId);
+        return ResponseEntity.ok(product);
     }
 }
