@@ -1,15 +1,27 @@
 package com.turntabl.api.domain;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.math.BigDecimal;
 
+@ApiModel( description = "Product data Model description")
 public class Product {
+    @ApiModelProperty(value = "productId description")
     private String productId;
+    @ApiModelProperty(value = "exchange description")
     private String exchange;
+    @ApiModelProperty(value = "ticker description")
     private String ticker;
+    @ApiModelProperty(value = "displayName description")
     private String displayName;
+    @ApiModelProperty(value = "open description")
     private BigDecimal open;
+    @ApiModelProperty(value = "high description")
     private BigDecimal high;
+    @ApiModelProperty(value = "ask description")
     private BigDecimal ask;
+    @ApiModelProperty(value = "volume description")
     private Integer volume;
 
     public String getProductId() {
