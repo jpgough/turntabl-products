@@ -30,7 +30,7 @@ public class ProductsApplication {
 				.paths(PathSelectors.any())
 				.build()
                 .apiInfo(metaInfo())
-				.host("localhost/products");
+				.host("http://localhost/products");
 	}
 
     private ApiInfo metaInfo() {
