@@ -39,7 +39,7 @@ public class ProductsApplication {
     private ApiInfo metaInfo() {
         return new ApiInfo(
                 "Products API",
-                "products api description",
+                "REST API which allows you to view and manage your products",
                 "1.0",
                 "Terms of Service",
                 "products Contact <productcontact@email.io>",

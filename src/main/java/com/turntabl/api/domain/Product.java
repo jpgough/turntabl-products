@@ -7,21 +7,21 @@ import java.math.BigDecimal;
 
 @ApiModel( description = "Product data Model description")
 public class Product {
-    @ApiModelProperty(value = "productId description")
+    @ApiModelProperty(value = "unique identifier for the product")
     private String productId;
-    @ApiModelProperty(value = "exchange description")
+    @ApiModelProperty(value = "the exchange on which the stock is listed")
     private String exchange;
-    @ApiModelProperty(value = "ticker description")
+    @ApiModelProperty(value = "the executed product’s ticker symbol")
     private String ticker;
-    @ApiModelProperty(value = "displayName description")
+    @ApiModelProperty(value = "name of the company")
     private String displayName;
-    @ApiModelProperty(value = "open description")
+    @ApiModelProperty(value = "opening price of the product on the last trading day.")
     private BigDecimal open;
-    @ApiModelProperty(value = "high description")
+    @ApiModelProperty(value = "highest price achieved on the last trading day")
     private BigDecimal high;
-    @ApiModelProperty(value = "ask description")
+    @ApiModelProperty(value = "price the product was sold or bought")
     private BigDecimal ask;
-    @ApiModelProperty(value = "volume description")
+    @ApiModelProperty(value = "amount of the product traded on the last trading day")
     private Integer volume;
 
     public String getProductId() {
